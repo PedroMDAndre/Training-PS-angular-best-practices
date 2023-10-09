@@ -1,24 +1,25 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
-import { appRoutes } from './routes'
-import { AppComponent }  from './app.component';
-import { NavBarComponent }  from './nav-bar.component';
+import { appRoutes } from "./routes";
+import { AppComponent } from "./app.component";
+import { NavBarComponent } from "./nav-bar.component";
 import { CatalogComponent } from "./catalog/catalog.component";
 import { RegisterComponent } from "./users/register.component";
 import { SignInComponent } from "./users/sign-in.component";
 import { LoadingComponent } from "./components/loading-spinner.component";
-import { DataRepositoryService } from "./services/data-repository.service"
+import { UserRepositoryService } from "./services/user-repository.service";
 import { AccountMenuComponent } from "./account-menu.component";
+import { CatalogRepositoryService } from "./catalog/catalog-repository.service";
 
 @NgModule({
-  imports:      [
+  imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   declarations: [
     AppComponent,
@@ -27,9 +28,9 @@ import { AccountMenuComponent } from "./account-menu.component";
     RegisterComponent,
     SignInComponent,
     LoadingComponent,
-    AccountMenuComponent
+    AccountMenuComponent,
   ],
-  providers: [ DataRepositoryService ],
-  bootstrap:    [ AppComponent ]
+  providers: [CatalogRepositoryService, UserRepositoryService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { DataRepositoryService } from "../services/data-repository.service";
+import { UserRepositoryService } from "../services/user-repository.service";
 
 @Component({
   styleUrls: ["./register.component.css"],
@@ -18,7 +18,7 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private dataRepository: DataRepositoryService
+    private userRepository: UserRepositoryService
   ) {}
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class RegisterComponent {
 
   registerUser(user) {
     this.saving = true;
-    this.dataRepository.saveUser(user).subscribe(
+    this.userRepository.saveUser(user).subscribe(
       null,
       () => (this.saving = false),
       () => this.router.navigate(["/catalog"])

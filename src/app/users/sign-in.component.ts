@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { DataRepositoryService } from "../services/data-repository.service";
+import { UserRepositoryService } from "../services/user-repository.service";
 
 @Component({
   styles: [
@@ -141,11 +141,11 @@ export class SignInComponent {
 
   constructor(
     private router: Router,
-    private dataRepository: DataRepositoryService
+    private userRepository: UserRepositoryService
   ) {}
 
   signIn(credentials: any) {
-    this.dataRepository.signIn(credentials).subscribe(
+    this.userRepository.signIn(credentials).subscribe(
       null,
       (err) => {
         console.error(err, "Error");
