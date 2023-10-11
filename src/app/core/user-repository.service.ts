@@ -52,8 +52,8 @@ export class UserRepositoryService {
     //Never, ever check credentials in client-side code.
     //This code is only here to supply a fake endpoint for signing in.
     if (
-      credentials.email !== "me@whitebeards.edu" ||
-      credentials.password !== "super-secret"
+      credentials.email !== "hello@gg.com" ||
+      credentials.password !== "hello@gg.com"
     )
       return throwError(() => new Error("Invalid login"));
 
@@ -74,8 +74,8 @@ const users = [
     userId: "e61aebed-dbc5-437a-b514-02b8380d8efc",
     firstName: "Jim",
     lastName: "Cooper",
-    email: "someones-email@gmail.com",
-    password: "supersecret",
+    email: "hello@gg.com",
+    password: "hello@gg.com",
     classes: ["24ab7b14-f935-44c1-b91b-8598123ea54a"],
   },
 ];
