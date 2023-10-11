@@ -1,30 +1,30 @@
 import { Component } from "@angular/core";
 import { CatalogRepositoryService } from "./catalog-repository.service";
 import { UserRepositoryService } from "../services/user-repository.service";
+import { IClass } from "./class.model";
+import { IUser } from "../users/user.model";
 
 @Component({
   styleUrls: ["./catalog.component.css"],
   templateUrl: "./catalog.component.html",
 })
 export class CatalogComponent {
-  currentUser: any;
-  classes: any[];
-  visibleClasses: any[];
+  classes: IClass[] = [];
+  visibleClasses: IClass[] = [];
 
   constructor(
     private catalogRepository: CatalogRepositoryService,
-    private userRepository: UserRepositoryService
+    public userRepository: UserRepositoryService
   ) {}
 
   ngOnInit() {
-    this.currentUser = this.userRepository.currentUser;
     this.catalogRepository.getCatalog().subscribe((classes) => {
       this.classes = classes;
       this.applyFilter("");
     });
   }
 
-  enroll(classToEnroll) {
+  enroll(classToEnroll: IClass) {
     classToEnroll.processing = true;
     this.userRepository.enroll(classToEnroll.classId).subscribe(
       null,
@@ -39,7 +39,7 @@ export class CatalogComponent {
     );
   }
 
-  drop(classToDrop) {
+  drop(classToDrop: IClass) {
     classToDrop.processing = true;
     this.userRepository.drop(classToDrop.classId).subscribe(
       null,
@@ -54,20 +54,28 @@ export class CatalogComponent {
     );
   }
 
-  applyFilter(filter) {
-    if (!filter) return (this.visibleClasses = this.classes);
-
-    if (filter === "GEN") {
-      return (this.visibleClasses = this.classes.filter(
-        (c) =>
-          !c.course.courseNumber.startsWith("CH") &&
-          !c.course.courseNumber.startsWith("PO") &&
-          !c.course.courseNumber.startsWith("SP")
-      ));
+  applyFilter(filter: string) {
+    if (!filter) {
+      this.visibleClasses = this.classes;
+      return;
     }
 
-    return (this.visibleClasses = this.classes.filter((c) =>
+    if (filter === "GEN") {
+      this.showOnlyGeneralCourses();
+      return;
+    }
+
+    this.visibleClasses = this.classes.filter((c) =>
       c.course.courseNumber.startsWith(filter)
-    ));
+    );
+  }
+
+  showOnlyGeneralCourses(): void {
+    this.visibleClasses = this.classes.filter(
+      (c) =>
+        !c.course.courseNumber.startsWith("CH") &&
+        !c.course.courseNumber.startsWith("PO") &&
+        !c.course.courseNumber.startsWith("SP")
+    );
   }
 }
