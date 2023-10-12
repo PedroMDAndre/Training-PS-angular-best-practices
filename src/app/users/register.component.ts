@@ -45,7 +45,9 @@ export class RegisterComponent {
 
   private saveAndRedirect(user: IUser) {
     this.userRepository.saveUser(user).subscribe({
-      complete: () => this.router.navigate(["/catalog"]),
+      complete: () => {
+        this.router.navigate(["/catalog"]);
+      },
       error: () => (this.saving = false),
     });
   }
