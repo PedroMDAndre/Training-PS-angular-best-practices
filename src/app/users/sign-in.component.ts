@@ -16,13 +16,14 @@ export class SignInComponent {
   ) {}
 
   signIn(credentials: any) {
-    this.userRepository.signIn(credentials).subscribe(
-      null,
-      (err) => {
+    this.userRepository.signIn(credentials).subscribe({
+      complete: () => {
+        this.router.navigate(["/catalog"]);
+      },
+      error: (err) => {
         console.error(err, "Error");
       },
-      () => this.router.navigate(["/catalog"])
-    );
+    });
   }
 
   cancel() {

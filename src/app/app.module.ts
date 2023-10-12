@@ -5,8 +5,6 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { appRoutes } from "./routes";
 import { AppComponent } from "./app.component";
-import { RegisterComponent } from "./users/register.component";
-import { SignInComponent } from "./users/sign-in.component";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 import { CatalogModule } from "./catalog/catalog.module";
@@ -21,11 +19,7 @@ import { CatalogModule } from "./catalog/catalog.module";
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
   ],
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    SignInComponent,
-  ],
+  declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

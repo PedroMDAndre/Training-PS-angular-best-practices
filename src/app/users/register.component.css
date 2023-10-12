@@ -7,6 +7,7 @@ form {
   padding:30px;
   width: 550px;
   margin: 0 auto;
+  flex-direction: column;
 }
 input {
   display: block;
