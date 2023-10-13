@@ -13,6 +13,8 @@ export class CatalogComponent implements OnInit {
   classes: IClass[] = [];
   visibleClasses: IClass[] = [];
 
+  orderByField: string = "";
+
   constructor(
     private catalogRepository: CatalogRepositoryService,
     public userRepository: UserRepositoryService,
@@ -24,6 +26,18 @@ export class CatalogComponent implements OnInit {
       this.classes = classes;
       this.applyFilter("");
     });
+  }
+
+  mutateFirstProfessor(): void {
+    this.visibleClasses[0].professor = "Zebraman";
+  }
+
+  updateFirstProfessor(): void {
+    this.visibleClasses = [
+      { ...this.visibleClasses[0], professor: "James" },
+      ...this.visibleClasses.slice(1),
+    ];
+    this.visibleClasses[0].professor = "Zebraman";
   }
 
   enroll(classToEnroll: IClass) {
